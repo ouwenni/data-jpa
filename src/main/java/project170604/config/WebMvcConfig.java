@@ -10,7 +10,7 @@ import org.springframework.web.servlet.config.annotation.*;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
-import org.thymeleaf.templateresolver.TemplateResolver;
+
 
 import java.util.Locale;
 
@@ -26,6 +26,8 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
         registry.addViewController("/login").setViewName("login");
         registry.addViewController("/user").setViewName("user");
+        registry.addViewController("/nsr").setViewName("nsr");
+        registry.addViewController("/data").setViewName("data");
 
     }
 

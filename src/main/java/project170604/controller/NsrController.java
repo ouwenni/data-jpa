@@ -3,36 +3,47 @@ package project170604.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import project170604.dao.UserRepository;
-import project170604.domain.Msg;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import project170604.dao.NsrRepository;
+import project170604.dao.UserRepository;
+import project170604.domain.Nsrxx;
 import project170604.domain.SysUser;
 
+import java.util.List;
+import java.util.Map;
+
 /**
- * Created by lyp on 2017/6/4.
+ * Created by lyp on 2017/6/6.
  */
 
 @Controller
-public class HomeController {
+@RequestMapping("/nsr")
+public class NsrController {
 
     @Autowired
-    private UserRepository userRepository;
+    NsrRepository nsrRepository;
 
-    @RequestMapping("/")
-    public String index(Model model){
+    @Autowired
+    UserRepository userRepository;
+
+    @RequestMapping(method = RequestMethod.GET)
+    public String findbydept(Map<String,Object> model){
 
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext()
                 .getAuthentication()
                 .getPrincipal();
 
         SysUser user = userRepository.findByUsername(userDetails.getUsername());
+        String dept = user.getDept();
+        List<Nsrxx> nsrxxes = nsrRepository.findByDept(dept);
 
-        Msg msg = new Msg(userDetails.getUsername(),"test content","test etraInfo");
-        //Msg msg = new Msg(user.getUsername(),user.getCname(),user.getDept());
-        model.addAttribute("msg",msg);
-        return "home";
+        model.put("nsrxxes",nsrxxes);
+
+        return "nsr";
 
     }
+
+
 }

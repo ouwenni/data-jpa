@@ -1,6 +1,6 @@
 package project170604.dao;
 
-import project170604.domain.User;
+import project170604.domain.SysUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -9,8 +9,8 @@ import org.springframework.stereotype.Repository;
  */
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Integer>{
+public interface UserRepository extends JpaRepository<SysUser, Integer>{
 
-    User findByUsername(String username);
+    SysUser findByUsername(String username);
 
 }

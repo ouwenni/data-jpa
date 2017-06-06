@@ -19,11 +19,14 @@ body {
 	 <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
-          <a class="navbar-brand" href="#">Spring Security演示</a>
+          <a class="navbar-brand" href="#">风险纳税人信息统计</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-           <li><a th:href="@{/}"> 首页 </a></li>
+              <li><a th:href="@{/}"> 首页 </a></li>
+              <li><a th:href="@{/user}"> 添加用户 </a></li>
+              <li><a th:href="@{/nsr}"> 纳税人信息 </a></li>
+              <li><a th:href="@{/data}"> 统计分析 </a></li>
            
           </ul>
         </div><!--/.nav-collapse -->
