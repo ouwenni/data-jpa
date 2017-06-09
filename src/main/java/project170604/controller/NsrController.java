@@ -19,7 +19,7 @@ import java.util.Map;
  */
 
 @Controller
-@RequestMapping("/nsr")
+@RequestMapping("/nsrxx")
 public class NsrController {
 
     @Autowired
@@ -41,7 +41,7 @@ public class NsrController {
 
         model.put("nsrxxes",nsrxxes);
 
-        return "nsr";
+        return "nsrxx";
 
     }
 

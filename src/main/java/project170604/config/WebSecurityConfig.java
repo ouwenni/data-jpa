@@ -35,8 +35,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         */
 
         auth.jdbcAuthentication().dataSource(dataSource)
-                .usersByUsernameQuery("select username,password,true from SysUser where username=?")
-                .authoritiesByUsernameQuery("select username,role from SysUser where username=?");
+                .usersByUsernameQuery("select username,password,true from sysuser where username=?")
+                .authoritiesByUsernameQuery("select username,role from sysuser where username=?");
 
     }
 
@@ -46,8 +46,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
       //  http.authorizeRequests().anyRequest().permitAll();
         http.authorizeRequests()
                 .antMatchers("/login","/css/**","/img/**","/js/**").permitAll()
-                .and().authorizeRequests().antMatchers("/nsr").hasAnyRole("USER","SUPER_ADMIN")
+                .and().authorizeRequests().antMatchers("/nsrxx").hasAnyRole("USER","SUPER_ADMIN")
+                .and().authorizeRequests().antMatchers("/updatensrxx").hasAnyRole("USER","SUPER_ADMIN")
                 .and().authorizeRequests().antMatchers("/user").hasAnyRole("ADMIN","SUPER_ADMIN")
+                .and().authorizeRequests().antMatchers("/updateuser").hasAnyRole("ADMIN","SUPER_ADMIN")
                 .and().authorizeRequests().antMatchers("/data").hasAnyRole("DBA","SUPER_ADMIN")
                 .anyRequest().authenticated().and().formLogin()
                 .loginPage("/login").defaultSuccessUrl("/").permitAll().and().logout().permitAll();

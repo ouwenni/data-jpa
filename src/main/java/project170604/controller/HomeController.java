@@ -29,8 +29,8 @@ public class HomeController {
 
         SysUser user = userRepository.findByUsername(userDetails.getUsername());
 
-        Msg msg = new Msg(userDetails.getUsername(),"test content","test etraInfo");
-        //Msg msg = new Msg(user.getUsername(),user.getCname(),user.getDept());
+        //Msg msg = new Msg(userDetails.getUsername(),"test content");
+        Msg msg = new Msg(user.getUsername(),user.getCname(),user.getDept());
         model.addAttribute("msg",msg);
         return "home";
 

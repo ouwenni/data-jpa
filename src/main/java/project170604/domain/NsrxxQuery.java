@@ -1,20 +1,13 @@
 package project170604.domain;
 
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import java.util.Date;
 
 /**
- * Created by lyp on 2017/6/6.
+ * Created by lyp on 2017/6/8.
  */
-
-@Entity
-public class Nsrxx {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+public class NsrxxQuery {
 
     private String nsrsbh;
     private String nsrmc;
@@ -23,34 +16,7 @@ public class Nsrxx {
 
     private String sfwj;
 
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Date lrrq;
-
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public Date getLrrq() {
-        return lrrq;
-    }
-
-    public void setLrrq(Date lrrq) {
-        this.lrrq = lrrq;
-    }
-
-    public String getSfwj() {
-
-        return sfwj;
-    }
-
-    public void setSfwj(String sfwj) {
-        this.sfwj = sfwj;
-    }
 
     public String getNsrsbh() {
         return nsrsbh;
@@ -84,16 +50,31 @@ public class Nsrxx {
         this.lrr = lrr;
     }
 
-    public Nsrxx(String nsrsbh, String nsrmc, String dept, String lrr,String sfwj,Date lrrq) {
+    public String getSfwj() {
+        return sfwj;
+    }
+
+    public void setSfwj(String sfwj) {
+        this.sfwj = sfwj;
+    }
+
+    public Date getLrrq() {
+        return lrrq;
+    }
+
+    public void setLrrq(Date lrrq) {
+        this.lrrq = lrrq;
+    }
+
+    public NsrxxQuery() {
+    }
+
+    public NsrxxQuery(String nsrsbh, String nsrmc, String dept, String lrr, String sfwj, Date lrrq) {
         this.nsrsbh = nsrsbh;
         this.nsrmc = nsrmc;
         this.dept = dept;
         this.lrr = lrr;
         this.sfwj = sfwj;
         this.lrrq = lrrq;
-    }
-
-    public Nsrxx() {
-
     }
 }

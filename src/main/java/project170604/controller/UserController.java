@@ -1,5 +1,7 @@
 package project170604.controller;
 
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
@@ -25,7 +28,7 @@ public class UserController {
 
 
     @RequestMapping(method = RequestMethod.POST)
-    public String save(Model model, @ModelAttribute(value = "user")SysUser user){
+    public String save(Model model,@Valid @ModelAttribute(value = "user")SysUser user){
 
         SysUser saveuser = userRepository.save(new SysUser(user.getUsername(),
                 user.getCname(),
@@ -38,9 +41,19 @@ public class UserController {
         return "redirect:/user";
     }
 
+
+
     @RequestMapping(method = RequestMethod.GET)
     public String findUsers(Map<String,Object> model){
-        List<SysUser> users = userRepository.findAll();
+//        List<SysUser> users = userRepository.findAll();
+
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext()
+                .getAuthentication()
+                .getPrincipal();
+
+        SysUser user = userRepository.findByUsername(userDetails.getUsername());
+        String dept = user.getDept();
+        List<SysUser> users = userRepository.findAllByDeptLike(dept);
         model.put("users",users);
         return "user";
     }

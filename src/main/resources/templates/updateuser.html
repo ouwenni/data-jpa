@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>User Display</title>
+
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+
+    <link th:href="@{/css/bootstrap-theme.min.css}" rel="stylesheet" />
+
+
+    <link th:href="@{/css/signin.css}" rel="stylesheet" />
+
+  </head>
+
+  <body>
+
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">风险纳税人信息统计</a>
+      </div>
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li><a th:href="@{/}"> 首页 </a></li>
+          <li><a th:href="@{/user}"> 添加用户 </a></li>
+          <li><a th:href="@{/updateuser}"> 修改用户 </a></li>
+
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </nav>
+
+    <div class="container">
+
+      <div class="page-header">
+        <h1>修改用户</h1>
+      </div>
+      <div class="row">
+
+        <div class="col-md-12">
+
+          <form class="form-signin" th:method="POST"  th:action="@{/user/save}" action="#">
+
+            <label for="usernameupdate" class="sr-only">Username</label>
+            <input type="text" id="usernameupdate" name="username" class="form-control" placeholder="用户名" required="required" autofocus="autofocus" th:value="${username}"></input>
+
+            <label for="passwordupdate" class="sr-only">Password</label>
+            <input type="password" id="passwordupdate" name="password" class="form-control" placeholder="密码" th:value="${password}"></input>
+
+            <label for="cnameupdate" class="sr-only">Cname</label>
+            <input type="text" id="cnameupdate" name="cname" class="form-control" placeholder="姓名" th:value="${cname}"></input>
+
+            <label for="deptupdate" class="sr-only">Dept</label>
+            <input type="text" id="deptupdate" name="dept" class="form-control" placeholder="部门" th:value="${dept}"></input>
+            <input type="hidden" name="role" value="ROLE_USER"/>
+
+            <div class="col-md-4"><input class="btn btn-success btn-block" type="submit" formaction="/updateuser/search" value="查找"></input></div>
+            <div class="col-md-4"><input class="btn btn-warning btn-block" type="submit" formaction="/updateuser/update" value="更新"></input></div>
+            <div class="col-md-4"><input class="btn btn-danger btn-block" type="submit" formaction="/updateuser/delete" value="删除"></input></div>
+
+          </form>
+
+
+
+        </div>
+
+
+      </div>
+
+      <div th:class="${alertclass}" th:text="${alerttext}" style="margin-top: 50px"></div>
+
+    </div> <!-- /container -->
+
+
+
+
+  </body>
+</html>

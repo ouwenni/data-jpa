@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -16,6 +17,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.persistence.EntityManager;
 import javax.sql.DataSource;
 import java.util.Map;
+import java.util.Properties;
 
 /**
  * Created by lyp on 2017/6/6.
@@ -41,20 +43,21 @@ public class PrimaryConfig {
     @Primary
     @Bean(name = "entityManagerFactoryPrimary")
     public LocalContainerEntityManagerFactoryBean entityManagerFactoryPrimary (EntityManagerFactoryBuilder builder) {
-        return builder
+
+        LocalContainerEntityManagerFactoryBean em = builder
                 .dataSource(primaryDataSource)
-                .properties(getVendorProperties(primaryDataSource))
                 .packages("project170604.domain") //设置实体类所在位置
-                .persistenceUnit("primaryPersistenceUnit")
+        //        .persistenceUnit("primaryPersistenceUnit")
                 .build();
+
+ //       Properties properties = new Properties();
+
+ //       properties.setProperty("hibernate.physical_naming_strategy", "org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy");
+ //      em.setJpaProperties(properties);
+
+        return em;
     }
 
-    @Autowired
-    private JpaProperties jpaProperties;
-
-    private Map<String, String> getVendorProperties(DataSource dataSource) {
-        return jpaProperties.getHibernateProperties(dataSource);
-    }
 
     @Primary
     @Bean(name = "transactionManagerPrimary")
